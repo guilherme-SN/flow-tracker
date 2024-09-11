@@ -1,101 +1,118 @@
+import { Button } from "@/components/ui/button"
+
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  {
+    /* Example Tasks Data (DELETE) */
+  }
+  const taskList = [
+    {
+      id: 1,
+      taskDescription: "Task 1",
+      isCompleted: true,
+    },
+    {
+      id: 2,
+      taskDescription: "Task 2",
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      taskDescription: "Task 3",
+      isCompleted: true,
+    },
+    {
+      id: 4,
+      taskDescription: "Task 4",
+      isCompleted: false,
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  return (
+    <main>
+      {/* Timer */}
+      <div className="flex bg-slate-100 w-[630px] h-[310px] rounded-lg mx-auto justify-center">
+        <div className="container flex flex-col items-center">
+          {/* Modes */}
+          <div className="flex flex-row justify-center gap-10 mt-10">
+            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-900 text-white text-xl font-medium">
+              Focus
+            </div>
+            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-200 text-xl font-medium">
+              Break
+            </div>
+          </div>
+
+          {/* Timer */}
+          <div>
+            <p className="text-[125px] font-bold leading-none">00:00</p>
+          </div>
+
+          {/* Timer Buttons */}
+          <div className="flex flex-row justify-around w-[320px] mt-4">
             <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="icons/play-circle.svg"
+              alt="Play Icon"
+              width={40}
+              height={40}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <Image
+              src="icons/stop-circle.svg"
+              alt="Stop Icon"
+              width={40}
+              height={40}
+            />
+            <Image
+              src="icons/timer-reset.svg"
+              alt="Reset Timer Icon"
+              width={40}
+              height={40}
+            />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      {/* Tasks */}
+
+      <h2 className="flex flex-row justify-between mt-10 scroll-m-20 border-black">
+        Tasks
+        <Image
+          src="icons/settings-2.svg"
+          alt="Settings Icon"
+          width={40}
+          height={40}
+        />
+      </h2>
+
+      <div className="flex flex-col">
+        {taskList.map((task) => (
+          <div
+            className="flex flex-row items-center justify-between bg-slate-100 rounded-lg h-[55px] mt-5"
+            key={task.id}
+          >
+            <div className="flex flex-row items-center">
+              <Image
+                className="ml-2"
+                src="icons/check-circle-2.svg"
+                alt="Check Icon"
+                width={40}
+                height={40}
+              />
+              <p className="text-xl text-muted-foreground p-0 m-0 ml-2">
+                {task.taskDescription}
+              </p>
+            </div>
+            <Image
+              src="icons/Meatballs_menu.svg"
+              alt="Meatballs Menu Icon"
+              width={40}
+              height={40}
+            />
+          </div>
+        ))}
+        <Button className="font-bold mt-5">Add New Task</Button>
+      </div>
+    </main>
   );
 }

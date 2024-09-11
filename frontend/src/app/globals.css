@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #E2E8F0;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* @media (prefers-color-scheme: dark) { */
+/*   :root { */
+/*     --background: #0a0a0a; */
+/*     --foreground: #ededed; */
+/*   } */
+/* } */
 
 body {
   color: var(--foreground);
@@ -89,4 +89,24 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+main, nav {
+  @apply max-w-6xl mx-auto my-12;
+}
+
+main {
+  @apply max-w-[630px] mx-auto my-12 mb-0;
+}
+
+p {
+  @apply mt-2;
+}
+
+h1 {
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+}
+
+h2 {
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
 }
