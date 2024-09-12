@@ -36,10 +36,10 @@ export default function Home() {
         <div className="container flex flex-col items-center">
           {/* Modes */}
           <div className="flex flex-row justify-center gap-10 mt-10">
-            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-900 text-white text-xl font-medium">
+            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-900 text-white text-xl font-medium select-none">
               Focus
             </div>
-            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-200 text-xl font-medium">
+            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-200 text-xl font-medium select-none">
               Break
             </div>
           </div>
@@ -74,7 +74,6 @@ export default function Home() {
       </div>
 
       {/* Tasks */}
-
       <h2 className="flex flex-row justify-between mt-10 scroll-m-20 border-black">
         Tasks
         <Image
