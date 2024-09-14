@@ -42,6 +42,7 @@ public class TimerService {
 
         if (isRunning) {
             startTime = Instant.now();
+            isRunning = false;
         }
     }
 
