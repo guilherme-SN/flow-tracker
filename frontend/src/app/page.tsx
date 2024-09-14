@@ -1,3 +1,4 @@
+import TimerDisplay from "@/components/TimerDisplay";
 import { Button } from "@/components/ui/button";
 
 import Image from "next/image";
@@ -45,37 +46,7 @@ export default function Home() {
           </div>
 
           {/* Timer */}
-          <div>
-            <p className="text-[125px] font-bold leading-none">00:00</p>
-          </div>
-
-          {/* Timer Buttons */}
-          <div className="flex flex-row justify-around w-[320px] mt-4">
-            <Button className="rounded-full" variant="ghost" size="icon">
-              <Image
-                src="icons/play-circle.svg"
-                alt="Play Icon"
-                width={40}
-                height={40}
-              />
-            </Button>
-            <Button className="rounded-full" variant="ghost" size="icon">
-              <Image
-                src="icons/stop-circle.svg"
-                alt="Stop Icon"
-                width={40}
-                height={40}
-              />
-            </Button>
-            <Button className="rounded-full" variant="ghost" size="icon">
-              <Image
-                src="icons/timer-reset.svg"
-                alt="Reset Timer Icon"
-                width={40}
-                height={40}
-              />
-            </Button>
-          </div>
+          <TimerDisplay />
         </div>
       </div>
 
