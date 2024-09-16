@@ -49,7 +49,7 @@ export default function TimerDisplay() {
     setIsRunning(data.running);
   };
 
-  const formatTime = (totalSeconds) => {
+  const formatTime = (totalSeconds: number) => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
@@ -70,7 +70,7 @@ export default function TimerDisplay() {
     <div>
       <p className="text-[125px] font-bold leading-none">{formatTime(time)}</p>
 
-      <div className="flex flex-row justify-around w-[320px] mt-4">
+      <div className="flex flex-row justify-center gap-x-20 mt-4">
         <Button className="rounded-full" variant="ghost" size="icon" onClick={isRunning ? pauseTimer : startTimer}>
           <Image
             src={isRunning ? "icons/pause-circle.svg" : "icons/play-circle.svg"}
