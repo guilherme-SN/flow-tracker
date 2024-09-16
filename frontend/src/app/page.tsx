@@ -35,17 +35,6 @@ export default function Home() {
       {/* Timer */}
       <div className="flex bg-slate-100 w-[630px] h-[310px] rounded-lg mx-auto justify-center">
         <div className="container flex flex-col items-center">
-          {/* Modes */}
-          <div className="flex flex-row justify-center gap-10 mt-10">
-            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-900 text-white text-xl font-medium select-none">
-              Focus
-            </div>
-            <div className="flex justify-center items-center w-[130px] h-[50px] rounded-lg bg-slate-200 text-xl font-medium select-none">
-              Break
-            </div>
-          </div>
-
-          {/* Timer */}
           <TimerDisplay />
         </div>
       </div>
