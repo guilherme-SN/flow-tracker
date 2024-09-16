@@ -17,9 +17,15 @@ export default function TimerDisplay() {
     setIsRunning(false);
   };
 
-  const stopTimer = () => {
+  const stopTimer = async () => {
+    const response = await fetch(`http://localhost:8080/api/timer/calculate-break-time?focusTime=${time}`, {method: 'POST'});
+
+    if (response.ok) {
+      const textData = await response.text();
+      setTime(parseInt(textData, 10));
+    }
+
     setIsRunning(false);
-    setTime(0);
   };
 
   const resetTimer = () => {
