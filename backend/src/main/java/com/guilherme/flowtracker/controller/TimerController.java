@@ -1,13 +1,14 @@
 package com.guilherme.flowtracker.controller;
 
-import com.guilherme.flowtracker.dto.TimerStatus;
+import jakarta.servlet.http.HttpSession;
+
 import com.guilherme.flowtracker.service.TimerService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,33 +21,12 @@ public class TimerController {
         this.timerService = timerService;
     }
 
-    @PostMapping("/start")
-    public ResponseEntity<String> startTimer() {
-        timerService.start();
-        return ResponseEntity.ok("Timer Started");
-    }
+    @PostMapping("calculate-break-time")
+    public ResponseEntity<Integer> getBreakTime(@RequestParam("focusTime") Integer focusTime, HttpSession session) {
+        Float multiplier = (Float) session.getAttribute("breakTimeMultiplier");
+        if (multiplier == null) multiplier = 0.2f;
 
-    @PostMapping("/pause")
-    public ResponseEntity<String> pauseTimer() {
-        timerService.pause();
-        return ResponseEntity.ok("Timer Paused");
-    }
-
-    @PostMapping("/stop")
-    public ResponseEntity<String> stopTimer() {
-        timerService.stop();
-        return ResponseEntity.ok("Timer Stopped");
-    }
-
-    @PostMapping("/reset")
-    public ResponseEntity<String> resetTimer() {
-        timerService.reset();
-        return ResponseEntity.ok("Timer reset");
-    }
-
-    @GetMapping("/status")
-    public ResponseEntity<TimerStatus> getTimerStatus() {
-        return ResponseEntity.ok(timerService.getStatus());
+        return ResponseEntity.ok(timerService.calculateBreakTime(focusTime, multiplier));
     }
 }
 
