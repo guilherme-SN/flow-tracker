@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
+import styles from "./TimerDisplay.module.css";
+
 export default function TimerDisplay() {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -106,7 +108,7 @@ export default function TimerDisplay() {
       {/* Timer Controls */}
       <div className="flex flex-row justify-center gap-x-20 mt-4">
         <Button
-          className="rounded-full"
+          className={`rounded-full ${styles.buttonAnimation}`}
           variant="ghost"
           size="icon"
           onClick={isRunning ? pauseTimer : startTimer}
@@ -119,7 +121,7 @@ export default function TimerDisplay() {
           />
         </Button>
         <Button
-          className="rounded-full"
+          className={`rounded-full ${styles.buttonAnimation}`}
           variant="ghost"
           size="icon"
           onClick={stopTimer}
@@ -132,7 +134,7 @@ export default function TimerDisplay() {
           />
         </Button>
         <Button
-          className="rounded-full"
+          className={`rounded-full ${styles.buttonAnimation}`}
           variant="ghost"
           size="icon"
           onClick={resetTimer}
