@@ -1,4 +1,4 @@
-import TimerDisplay from "@/components/TimerDisplay";
+import TimerDisplay from "@/components/TimerDisplay/TimerDisplay";
 import { Button } from "@/components/ui/button";
 
 import Image from "next/image";
