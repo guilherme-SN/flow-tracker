@@ -1,13 +1,13 @@
 package com.guilherme.flowtracker.dto;
 
-public class UserSettings {
+public class UserSettingsDto {
     private Float breakTimeMultiplier;
 
-    public UserSettings() {
+    public UserSettingsDto() {
         this.breakTimeMultiplier = 0.2f;
     }
 
-    public UserSettings(float breakTimeMultiplier) {
+    public UserSettingsDto(float breakTimeMultiplier) {
         this.breakTimeMultiplier = breakTimeMultiplier;
     }
 
