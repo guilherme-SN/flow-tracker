@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/settings")
 @CrossOrigin(origins = "http://localhost:3000")
-public class SettingsController {
+public class UserSettingsController {
     @PostMapping("break-time-multiplier")
     public void setBreakTimeMultiplier(@RequestParam("multiplier") Float multiplier, HttpSession session) {
         session.setAttribute("breakTimeMultiplier", multiplier);
