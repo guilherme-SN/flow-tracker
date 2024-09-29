@@ -46,6 +46,8 @@ public class TaskController {
     public ResponseEntity<List<Task>> listTasks() {
         List<Task> tasks = taskService.listTasks();
 
+        tasks.sort((t1, t2) -> t1.getUpdatedAt().compareTo(t2.getUpdatedAt()));
+
         return ResponseEntity.ok(tasks);
     }
 
