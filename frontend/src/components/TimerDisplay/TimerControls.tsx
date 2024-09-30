@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import styles from "./TimerDisplay.module.css";
+import styles from "./Timer.module.css";
 
 interface TimerControlProps {
   isRunning: boolean;
