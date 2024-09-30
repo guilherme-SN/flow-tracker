@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +47,7 @@ public class TaskController {
     public ResponseEntity<List<Task>> listTasks() {
         List<Task> tasks = taskService.listTasks();
 
-        tasks.sort((t1, t2) -> t1.getUpdatedAt().compareTo(t2.getUpdatedAt()));
+        tasks.sort((t1, t2) -> t1.getCreatedAt().compareTo(t2.getCreatedAt()));
 
         return ResponseEntity.ok(tasks);
     }
@@ -75,12 +76,27 @@ public class TaskController {
     }) 
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody @Valid TaskDto taskDto, BindingResult result) {
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().build();
-        }
+        if (result.hasErrors()) return ResponseEntity.badRequest().build();
 
         UUID taskId = taskService.createTask(taskDto);
 
         return ResponseEntity.created(URI.create("/api/tasks/" + taskId.toString())).build();
+    }
+
+    @Operation(summary = "Update a task")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully updated the task"),
+        @ApiResponse(responseCode = "400", description = "Invalid input provided"),
+        @ApiResponse(responseCode = "404", description = "Task not found")
+    }) 
+    @PutMapping("/{taskId}")
+    public ResponseEntity<Task> updateTask(@PathVariable("taskId") String taskId, @RequestBody @Valid TaskDto taskDto, BindingResult result) {
+        if (result.hasErrors()) return ResponseEntity.badRequest().build();
+
+        Task updatedTask = taskService.updateTask(UUID.fromString(taskId), taskDto);
+
+        if (updatedTask == null) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(updatedTask);
     }
 }

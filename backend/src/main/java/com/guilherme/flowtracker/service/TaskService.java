@@ -31,4 +31,19 @@ public class TaskService {
 
         return taskRepository.save(task).getId();
     }
+
+    public Task updateTask(UUID taskId, TaskDto taskDto) {
+
+        Optional<Task> optionalTask = taskRepository.findById(taskId);
+
+        if (optionalTask.isPresent()) {
+            Task task = optionalTask.get();
+            task.setDescription(taskDto.getDescription());
+            task.setIsCompleted(taskDto.getIsCompleted());
+
+            return taskRepository.save(task);
+        }
+
+        return null;
+    }
 }
