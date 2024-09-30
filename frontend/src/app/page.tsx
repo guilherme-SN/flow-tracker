@@ -1,5 +1,5 @@
 
-import Tasks from "@/components/Tasks/Tasks";
+import TaskDisplay from "@/components/Tasks/TaskDisplay";
 import TimerDisplay from "@/components/TimerDisplay/TimerDisplay";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       </div>
 
       {/* Tasks */}
-      <Tasks />
+      <TaskDisplay />
     </main>
   );
 }
