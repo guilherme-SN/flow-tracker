@@ -11,7 +11,7 @@ interface Task {
   isCompleted: boolean;
 }
 
-const TaskList: React.FC<Task> = () => {
+const TaskList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const TaskList: React.FC<Task> = () => {
           key={task.id}
         >
           <TaskComponent
+            id={task.id}
             description={task.description}
             isCompleted={task.isCompleted}
           />
