@@ -1,7 +1,7 @@
 import Image from "next/image";
 import TaskList from "./TaskList";
 
-export default function Tasks() {
+export default function TaskDisplay() {
   return (
     <div className="mt-10 ">
       <h2 className="flex flex-row justify-between scroll-m-20 border-black">
