@@ -32,9 +32,10 @@ public class TaskService {
         return taskRepository.save(task).getId();
     }
 
-    public Task updateTask(UUID taskId, TaskDto taskDto) {
+    public Task updateTaskById(String taskId, TaskDto taskDto) {
+        UUID id = UUID.fromString(taskId);
 
-        Optional<Task> optionalTask = taskRepository.findById(taskId);
+        Optional<Task> optionalTask = taskRepository.findById(id);
 
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
@@ -46,4 +47,21 @@ public class TaskService {
 
         return null;
     }
+
+    public void deleteAllTasks() {
+        taskRepository.deleteAll();
+    }
+
+    public boolean deleteTaskById(String taskId) {
+        UUID id = UUID.fromString(taskId);
+
+        boolean taskExists = taskRepository.existsById(id);
+        if (taskExists) {
+            taskRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
+    }
 }
+

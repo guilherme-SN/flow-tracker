@@ -13,6 +13,7 @@ import com.guilherme.flowtracker.service.TaskService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,18 +86,46 @@ public class TaskController {
 
     @Operation(summary = "Update a task")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successfully updated the task"),
+        @ApiResponse(responseCode = "200", description = "Successfully updated the task",
+            content = @Content(schema = @Schema(implementation = Task.class))),
         @ApiResponse(responseCode = "400", description = "Invalid input provided"),
         @ApiResponse(responseCode = "404", description = "Task not found")
     }) 
     @PutMapping("/{taskId}")
-    public ResponseEntity<Task> updateTask(@PathVariable("taskId") String taskId, @RequestBody @Valid TaskDto taskDto, BindingResult result) {
+    public ResponseEntity<Task> updateTaskByIdById(@PathVariable("taskId") String taskId, @RequestBody @Valid TaskDto taskDto, BindingResult result) {
         if (result.hasErrors()) return ResponseEntity.badRequest().build();
 
-        Task updatedTask = taskService.updateTask(UUID.fromString(taskId), taskDto);
+        Task updatedTask = taskService.updateTaskById(taskId, taskDto);
 
         if (updatedTask == null) return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(updatedTask);
     }
+
+    @Operation(summary = "Delete all tasks")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Successfully deleted all tasks")
+    }) 
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAllTasks() {
+        taskService.deleteAllTasks();
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Delete a task")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Successfully deleted the task"),
+        @ApiResponse(responseCode = "404", description = "Task not found")
+    }) 
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<Void> deleteTaskById(@PathVariable("taskId") String taskId) {
+
+        boolean taskDeleted = taskService.deleteTaskById(taskId);
+
+        if (taskDeleted) return ResponseEntity.noContent().build();
+
+        return ResponseEntity.notFound().build();
+    }
 }
+
