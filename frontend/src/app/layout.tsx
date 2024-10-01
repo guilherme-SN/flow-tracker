@@ -27,6 +27,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -89,15 +90,17 @@ export default function RootLayout({
                     the <b>focus session</b> and enter <b>break mode</b>. In
                     break mode, press “<b>start</b>” to begin the break timer.
                   </p>
-                  <Button className="font-medium mt-10">
-                    <Image
-                      className="mr-2"
-                      src="icons/github.svg"
-                      alt="Github Icon"
-                      width={22}
-                      height={22}
-                    />
-                    Source Code
+                  <Button className="font-medium mt-10" asChild>
+                    <Link href="https://github.com/guilherme-SN/flow-tracker" target="_blank">
+                      <Image
+                        className="mr-2"
+                        src="icons/github.svg"
+                        alt="Github Icon"
+                        width={22}
+                        height={22}
+                      />
+                      Source Code
+                    </Link>
                   </Button>
                 </div>
               </DialogContent>
@@ -159,7 +162,9 @@ export default function RootLayout({
                     className="border-slate-300 my-1"
                   />
                   <DialogClose asChild>
-                    <Button type="button" className="mt-5">Save</Button>
+                    <Button type="button" className="mt-5">
+                      Save
+                    </Button>
                   </DialogClose>
                 </div>
               </DialogContent>

@@ -1,5 +1,5 @@
 
-import TaskDisplay from "@/components/Tasks/TaskDisplay";
+import TaskDisplay from "@/components/TaskDisplay/TaskDisplay";
 import TimerDisplay from "@/components/TimerDisplay/TimerDisplay";
 
 export default function Home() {
