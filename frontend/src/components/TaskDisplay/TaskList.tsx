@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { Button } from "@/components/ui/button";
 import TaskComponent from "./TaskComponent";
 
@@ -11,37 +10,29 @@ interface Task {
   isCompleted: boolean;
 }
 
-const TaskList: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+interface TaskListProps {
+  tasks: Task[];
+  fetchTasks: () => void;
+}
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await fetch("http://localhost:8080/api/tasks");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setTasks(data);
-    };
-
-    fetchTasks();
-  }, []);
-
+const TaskList: React.FC<TaskListProps> = ({ tasks, fetchTasks }) => {
   return (
     <div className="flex flex-col">
-      {tasks.map((task) => (
-        <div
-          key={task.id}
-        >
-          <TaskComponent
-            id={task.id}
-            description={task.description}
-            isCompleted={task.isCompleted}
-          />
-        </div>
-      ))}
-      <Button className="font-bold mt-5">Add New Task</Button>
+      {tasks.length === 0 ? (
+        <p className="text-gray-500">No tasks available.</p>
+      ) : (
+        tasks.map((task) => (
+          <div key={task.id}>
+            <TaskComponent
+              id={task.id}
+              description={task.description}
+              isCompleted={task.isCompleted}
+              fetchTasks={fetchTasks}
+            />
+          </div>
+        ))
+      )}
+      <Button className="font-bold mt-5" onClick={fetchTasks}>Add New Task</Button>
     </div>
   );
 };

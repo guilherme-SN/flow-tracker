@@ -6,19 +6,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import styles from "./Task.module.css";
 import { useState } from "react";
 
-interface TaskProps {
+interface TaskComponentProps {
   id: string;
   description: string;
   isCompleted: boolean;
+  fetchTasks: () => void;
 }
 
-const TaskComponent: React.FC<TaskProps> = ({
+const TaskComponent: React.FC<TaskComponentProps> = ({
   id,
   description,
   isCompleted,
+  fetchTasks,
 }) => {
   const [completed, setCompleted] = useState<boolean>(isCompleted);
 
@@ -40,6 +46,24 @@ const TaskComponent: React.FC<TaskProps> = ({
     }
 
     setCompleted((prevCompleted) => !prevCompleted);
+  };
+
+  const deleteTask = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/tasks/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.status !== 204) {
+        throw new Error("Failed to delete task");
+      }
+
+      toast.success("Task deleted successfully!");
+
+      fetchTasks();
+    } catch (error) {
+      toast.error("Failed to delete task");
+    }
   };
 
   return (
@@ -88,7 +112,7 @@ const TaskComponent: React.FC<TaskProps> = ({
             />
             Edit Task
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={deleteTask}>
             <Image
               className="mr-1"
               src="icons/trash-bin.svg"
