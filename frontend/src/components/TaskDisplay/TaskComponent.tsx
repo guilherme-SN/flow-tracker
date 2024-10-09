@@ -1,17 +1,28 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-import { toast, ToastContainer } from "react-toastify";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import styles from "./Task.module.css";
-import { useState } from "react";
 
 interface TaskComponentProps {
   id: string;
@@ -27,6 +38,8 @@ const TaskComponent: React.FC<TaskComponentProps> = ({
   fetchTasks,
 }) => {
   const [completed, setCompleted] = useState<boolean>(isCompleted);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [editedDescription, setEditedDescription] = useState<string>(description);
 
   const toggleCompletion = async () => {
     const response = await fetch(`http://localhost:8080/api/tasks/${id}`, {
@@ -46,6 +59,23 @@ const TaskComponent: React.FC<TaskComponentProps> = ({
     }
 
     setCompleted((prevCompleted) => !prevCompleted);
+  };
+
+  const editTask = async () => {
+    const response = await fetch(`http://localhost:8080/api/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ description: editedDescription, isCompleted: false }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to edit task");
+    }
+
+    fetchTasks();
+    setIsDialogOpen(false);
   };
 
   const deleteTask = async () => {
@@ -87,11 +117,14 @@ const TaskComponent: React.FC<TaskComponentProps> = ({
           />
         </Button>
         <p
-          className={`transition ease delay-1 text-xl p-0 m-0 ml-2 ${completed ? "line-through text-muted-foreground" : ""}`}
+          className={`transition ease delay-1 text-xl p-0 m-0 ml-2 ${
+            completed ? "line-through text-muted-foreground" : ""
+          }`}
         >
           {description}
         </p>
       </div>
+
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Image
@@ -102,7 +135,7 @@ const TaskComponent: React.FC<TaskComponentProps> = ({
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
             <Image
               className="mr-1"
               src="icons/edit.svg"
@@ -110,7 +143,7 @@ const TaskComponent: React.FC<TaskComponentProps> = ({
               width={20}
               height={20}
             />
-            Edit Task
+            Edit task
           </DropdownMenuItem>
           <DropdownMenuItem onClick={deleteTask}>
             <Image
@@ -124,8 +157,37 @@ const TaskComponent: React.FC<TaskComponentProps> = ({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="bg-slate-100">
+          <DialogHeader>
+            <DialogTitle className="text-xl">Edit Task</DialogTitle>
+          </DialogHeader>
+          <div className="flex items-center space-x-2">
+            <div className="grid flex-1 gap-2">
+              <Label className="font-bold" htmlFor="description">
+                Description
+              </Label>
+              <Input
+                id="description"
+                placeholder="Enter task description"
+                value={editedDescription}
+                onChange={(e) => setEditedDescription(e.target.value)}
+              />
+            </div>
+          </div>
+          <DialogFooter className="sm:justify-end">
+            <DialogClose asChild>
+              <Button type="button" onClick={editTask}>
+                Save
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
 export default TaskComponent;
+
