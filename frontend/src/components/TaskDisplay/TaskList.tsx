@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import TaskComponent from "./TaskComponent";
 
 interface Task {
@@ -32,7 +31,6 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, fetchTasks }) => {
           </div>
         ))
       )}
-      <Button className="font-bold mt-5" onClick={fetchTasks}>Add New Task</Button>
     </div>
   );
 };
