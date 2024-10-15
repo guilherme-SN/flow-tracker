@@ -92,7 +92,7 @@ public class TaskController {
         @ApiResponse(responseCode = "404", description = "Task not found")
     }) 
     @PutMapping("/{taskId}")
-    public ResponseEntity<Task> updateTaskByIdById(@PathVariable("taskId") String taskId, @RequestBody @Valid TaskDto taskDto, BindingResult result) {
+    public ResponseEntity<Task> updateTaskById(@PathVariable("taskId") String taskId, @RequestBody @Valid TaskDto taskDto, BindingResult result) {
         if (result.hasErrors()) return ResponseEntity.badRequest().build();
 
         Task updatedTask = taskService.updateTaskById(taskId, taskDto);
