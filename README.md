@@ -5,6 +5,7 @@ This project is built with **Spring Boot** for backend and **Next.js** + **shadc
 
 ## Table of Contents
 - [Running the Project](#running-the-project)
+- [Demo](#demo)
 - [Backend Overview](#backend-overview)
 - [Frontend Overview](#frontend-overview)
 - [Design and Prototyping](#design-and-prototyping)
@@ -34,6 +35,9 @@ npm run dev
 > You need to have `npm` installed
 
 4. Access the frontend URL provided by Next.js, which is usually: [http://localhost:3000](http://localhost:3000)
+
+## Demo
+https://github.com/user-attachments/assets/325eff10-63df-43a9-b447-5b3d06ff3d48
 
 ## Backend Overview
 The backend of the project was developed with Spring Boot and is separate from the frontend. It provides a RESTful API to manage the application.
