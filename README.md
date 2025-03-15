@@ -4,25 +4,36 @@ FlowTracker is a web application designed to help users manage their focus and b
 This project is built with **Spring Boot** for backend and **Next.js** + **shadcn/ui** for frontend, with **Swagger** documentation for the API.
 
 ## Table of Contents
-- [Installation](#installation)
-- [Project Structure](#project-structure)
 - [Running the Project](#running-the-project)
-- [Endpoints](#endpoints)
 - [Frontend Overview](#frontend-overview)
 - [Backend Overview](#backend-overview)
 - [Design and Prototyping](#design-and-prototyping)
 - [Documentation](#documentation)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Installation
-
-## Project Structure
 
 ## Running the Project
+To run the project, follow these steps:
+1. Clone the project repository
+```bash
+git clone https://github.com/guilherme-SN/flow-tracker.git
+```
 
-## Endpoints
+2. Inside the backend/ directory, run the Spring Boot application with the following environment variables
+```bash
+PROD_DB_HOST=localhost PROD_DB_PORT=3307 PROD_DB_NAME=flowtrackerdatabase \
+PROD_DB_USERNAME=root PROD_DB_PASSWORD=verysecret \
+mvn spring-boot:run
+```
+> You need to have `Docker` installed
+
+3. Inside the frontend/ directory, run the Next.js application
+```bash
+npm install
+npm run dev
+```
+> You need to have `npm` installed
+
+4. Access the frontend URL provided by Next.js, which is usually: [http://localhost:3000](http://localhost:3000)
 
 ## Frontend Overview
 
