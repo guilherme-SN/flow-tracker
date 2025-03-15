@@ -1,12 +1,12 @@
-# FlowTracker -- Time and Focus Management Application
+# FlowTracker - Time and Focus Management Application
 FlowTracker is a web application designed to help users manage their focus and break times using the Flowtime technique. It features a timer for focus sessions, calculates the ideal break time, and offers a clean user interface for tracking productivity.
 
 This project is built with **Spring Boot** for backend and **Next.js** + **shadcn/ui** for frontend, with **Swagger** documentation for the API.
 
 ## Table of Contents
 - [Running the Project](#running-the-project)
-- [Frontend Overview](#frontend-overview)
 - [Backend Overview](#backend-overview)
+- [Frontend Overview](#frontend-overview)
 - [Design and Prototyping](#design-and-prototyping)
 - [Documentation](#documentation)
 - [Technologies Used](#technologies-used)
@@ -35,9 +35,24 @@ npm run dev
 
 4. Access the frontend URL provided by Next.js, which is usually: [http://localhost:3000](http://localhost:3000)
 
-## Frontend Overview
-
 ## Backend Overview
+The backend of the project was developed with Spring Boot and is separate from the frontend. It provides a RESTful API to manage the application.
+
+### Backend Structure
+- config/ → Stores application configurations like CORS and Swagger
+- controller/ → Defines API endpoints that interact with the frontend
+- dto/ → Stores Data Transfer Objects
+- model/ → Stores models for database entities (ORM)
+- repository/ → Interfaces to communicate with the database using JPA
+- service/ → Contains the core logic of the application
+
+## Frontend Overview
+The frontend of the project was built with Next.js and follows the Single Page Application (SPA) approach.
+
+### Frontend Structure
+- app/ → Contains the application pages following Next.js App Router
+- components/ → Reusable UI components
+- lib/ → Utility functions (if needed)
 
 ## Design and Prototyping
 The design interface of FlowTracker was created using Figma. You can access the figma [here](https://www.figma.com/design/TJZcWenP4a4DFs1PBcejBr/FlowTracker?node-id=0-1&t=sAJzksesbQ4gembn-1).
